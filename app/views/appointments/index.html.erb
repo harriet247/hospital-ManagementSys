@@ -21,5 +21,6 @@
 </table>
 
 <br>
-
+<% if account_signed_in? %>
 <%= link_to 'New Appointment', new_appointment_path %>
+<%end%>
