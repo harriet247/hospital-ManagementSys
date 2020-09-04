@@ -4,22 +4,33 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <% flash.each do |key, value| %>
+    <%= content_tag :div, value, :class => "flash #{key}" unless value.blank? %>
+  <% end %>
+
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Medical Team</a>
+        <%= link_to "Medical Team", showboard_path, class: "nav-link"%>
       </li>
-      <li class="nav-item dropdown">
+      <% if account_signed_in? %>
+        <li class="nav-item">
+        <%= link_to "Log out", destroy_account_session_path, method: :delete, class: "nav-link"%>
+        </li>
+      <%else%>
+        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Signin Portal</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Patient Login</a>
-          <a class="dropdown-item" href="#">New Patient Signup action</a>
-          <a class="dropdown-item" href="#">Medical Team Login</a>
+          <a class="dropdown-item" href="/accounts/sign_in">Patient Login</a>
+          <a class="dropdown-item" href="/accounts/sign_up">New Patient Signup 
+          </a>
+          <a class="dropdown-item" href="/accounts/sign_in">Medical Team Login</a>
         </div>
       </li>
+      <%end%>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="See a specific doctor" aria-label="Search">

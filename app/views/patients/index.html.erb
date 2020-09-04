@@ -21,5 +21,6 @@
 </table>
 
 <br>
-
+<% if Account.where(id: current_account.id).pluck(:accType) == "Medical Team"%>
 <%= link_to 'New Patient', new_patient_path %>
+<%end%>

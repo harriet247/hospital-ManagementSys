@@ -1,5 +1,18 @@
 <h1>New Doctor</h1>
-
+ <div class="item">
+          <label for="name">Name<span>*</span></label>
+          <div class="name-item">
+            <input id="name" type="text" name="name" placeholder="First" required/>
+            <input id="name" type="text" name="name" placeholder="Last" required/>
+          </div>
+        </div>
+     <div class="item">
+          <div class="name-item">
+            <div>
+              <label for="address">Email Address<span>*</span></label>
+              <input id="address" type="text" name="address" required/>
+            </div>
+            </div>
 <%= render 'form', doctor: @doctor %>
 
 <%= link_to 'Back', doctors_path %>
