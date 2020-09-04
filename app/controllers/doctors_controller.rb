@@ -1,5 +1,6 @@
 class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_account!, only: [:new,:create,:destroy]
 
   # GET /doctors
   # GET /doctors.json
@@ -24,8 +25,10 @@ class DoctorsController < ApplicationController
   # POST /doctors
   # POST /doctors.json
   def create
+    if Account.where(id: current_account.id).pluck(:accType) == "Medical Team"
     @doctor = Doctor.new(doctor_params)
-
+    @doctor.accounts_id = current_account.id;
+  
     respond_to do |format|
       if @doctor.save
         format.html { redirect_to @doctor, notice: 'Doctor was successfully created.' }
@@ -36,7 +39,7 @@ class DoctorsController < ApplicationController
       end
     end
   end
-
+end
   # PATCH/PUT /doctors/1
   # PATCH/PUT /doctors/1.json
   def update

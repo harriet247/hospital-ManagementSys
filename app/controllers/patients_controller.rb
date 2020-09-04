@@ -1,5 +1,7 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_account!, only: [:new,:create,:destroy]
+
 
   # GET /patients
   # GET /patients.json
@@ -25,7 +27,8 @@ class PatientsController < ApplicationController
   # POST /patients.json
   def create
     @patient = Patient.new(patient_params)
-
+    @patient.accounts_id = current_account.id
+    
     respond_to do |format|
       if @patient.save
         format.html { redirect_to @patient, notice: 'Patient was successfully created.' }

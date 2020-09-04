@@ -14,7 +14,7 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/doctors">Medical Team</a>
+        <%= link_to "Medical Team", showboard_path, class: "nav-link"%>
       </li>
       <% if account_signed_in? %>
         <li class="nav-item">
